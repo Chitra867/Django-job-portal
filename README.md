@@ -1,56 +1,225 @@
-Job Portal
-A Django-based job portal connecting job seekers and employers. Browse openings, submit applications, manage job postings, and review applications through role-based workflows.
-Features
-- Job seekers: Register, sign in, manage a profile, browse job listings, view job details, apply for jobs, and track applications.
-- Employers: Role-based accounts and job-posting workflows.
-- Administration: Manage jobs, users, applications, contact messages, and testimonials through a dedicated dashboard and Django admin.
-- Applications: Upload supporting files and track application statuses (applied, under review, shortlisted, rejected, or selected).
-- Community: Contact form and moderated testimonials.
-Tech stack
-- Backend: Python 3.13, Django 6.0.1
-- Database: SQLite for local development; optional PostgreSQL through DATABASE_URL
-- Frontend: Django templates, HTML, CSS, and JavaScript
-- Files: Cloudinary integration for profile photos and application attachments
-- Static assets: WhiteNoise
-Getting started (Windows / Git Bash)
-Prerequisites
-Install Python 3.13 and Git. If using Cloudinary-backed upload features, obtain your own Cloudinary credentials.
-1. Clone and enter the repository
-git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
-cd YOUR_REPOSITORY
-The repository root should contain manage.py and requirements.txt.
-2. Create and activate a virtual environment
+💼 Django Job Portal
+
+A full-stack job portal built with Python and Django, designed to connect job seekers with employment opportunities through a streamlined recruitment platform.
+
+The application provides job listings, application management, user authentication, profile management, and administrative tools.
+
+✨ Features
+
+👨‍💻 Job Seekers
+
+Register and securely log in.
+
+Browse available job opportunities.
+
+View detailed job descriptions and requirements.
+
+Apply for jobs and manage applications.
+
+Create and update personal profiles.
+
+Upload profile photos and supporting documents.
+
+Track job application statuses.
+
+🛠️ Administration
+
+Manage job listings and applications.
+
+Create, update, and delete job postings.
+
+Manage registered users.
+
+Review applications and update their statuses.
+
+Manage contact messages and testimonials.
+
+Access a dedicated administrative dashboard.
+
+🌐 Additional Features
+
+Responsive interface.
+
+Role-based user access.
+
+Contact form.
+
+Testimonial submission and moderation.
+
+Cloudinary integration for file uploads.
+
+SQLite for local development and optional PostgreSQL support.
+
+🧰 Technology Stack
+
+Category
+
+Technologies
+
+Backend
+
+Python 3.13, Django 6.0.1
+
+Frontend
+
+HTML5, CSS3, JavaScript, Django Templates
+
+Database
+
+SQLite, PostgreSQL
+
+File Storage
+
+Cloudinary
+
+Static Files
+
+WhiteNoise
+
+Deployment
+
+Gunicorn, Render-compatible configuration
+
+Version Control
+
+Git, GitHub
+
+📂 Project Structure
+
+Django-job-portal/
+├── accounts/
+├── jobs/
+│   ├── migrations/
+│   ├── static/
+│   ├── templates/
+│   ├── admin.py
+│   ├── forms.py
+│   ├── models.py
+│   ├── urls.py
+│   └── views.py
+├── myProject/
+│   ├── settings.py
+│   ├── urls.py
+│   ├── asgi.py
+│   └── wsgi.py
+├── static/
+├── .gitignore
+├── manage.py
+├── README.md
+└── requirements.txt
+
+🚀 Getting Started
+
+Follow these steps to run the project locally.
+
+1. Prerequisites
+
+Make sure you have installed:
+
+Python 3.13 or later within Django's supported Python versions
+
+Git
+
+A code editor such as Visual Studio Code
+
+2. Clone the Repository
+
+git clone https://github.com/Chitra867/Django-job-portal.git
+cd Django-job-portal
+
+3. Create a Virtual Environment
+
+On Windows:
+
 py -3.13 -m venv .venv
+
+Activate the environment using PowerShell:
+
+.\.venv\Scripts\Activate.ps1
+
+Or using Git Bash:
+
 source .venv/Scripts/activate
+
+4. Install Dependencies
+
 python -m pip install -r requirements.txt
-3. Set local environment variables
-Create a .env file alongside manage.py and supply your own values as appropriate:
+
+5. Configure Environment Variables
+
+Create a .env file in the project root, alongside manage.py.
+
 DEBUG=True
-SECRET_KEY=replace-with-your-own-random-django-secret-key
-# Optional: unset DATABASE_URL to use local SQLite.
+SECRET_KEY=replace-with-your-own-random-secret-key
+
+# Optional: PostgreSQL database
 # DATABASE_URL=postgresql://USER:PASSWORD@HOST:5432/DATABASE
-# Required for Cloudinary-backed file uploads:
+
+# Cloudinary configuration
 CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
-Generate a secret key locally using Django's get_random_secret_key(); never commit .env or real credentials. The project uses SQLite when DATABASE_URL is not set. Cloudinary-dependent file uploads require valid Cloudinary configuration.
-4. Initialize the database and run the server
-mkdir -p static
-python manage.py check
-python manage.py migrate
-python manage.py runserver
-Open http://127.0.0.1:8000/. For local administrator access, create an account with python manage.py createsuperuser and visit http://127.0.0.1:8000/admin/.
-Keep your existing local db.sqlite3 when working with real or test data. Back it up before running migrations. A fresh clone starts with an empty database.
 
-Project structure
-.
-├── jobs/                  # Models, views, routes, templates, migrations
-├── myProject/             # Django settings and project URL configuration
-├── manage.py              # Django management entry point
-├── requirements.txt       # Python dependencies
-└── static/                # Additional static assets (create if absent)
-Configuration and deployment
-Set DEBUG=False and use a strong, private SECRET_KEY in production. Configure hostnames, HTTPS, PostgreSQL (DATABASE_URL), and Cloudinary credentials for the deployment environment. Run database migrations and collect static assets as required by your host. The repository includes Gunicorn and WhiteNoise dependencies, but deployment must be configured separately for the target platform.
-Do not commit .env, databases containing user data, uploaded resumes or photos, virtual environments, or generated static files. If secrets were previously committed, removing them from the latest commit is not sufficient: rotate the affected credentials and clean repository history before making it public.
-Status
-Local Django configuration has been checked successfully in a Windows Python 3.13 environment. End-to-end application and deploym
+Generate a Django secret key locally:
+
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+
+Copy the generated value into your .env file.
+
+Security: Never commit your .env file, API keys, database credentials, or other secrets to GitHub.
+
+6. Set Up the Database
+
+By default, the project uses SQLite when DATABASE_URL is not configured.
+
+Run the database migrations:
+
+python manage.py migrate
+
+7. Create an Administrator Account
+
+python manage.py createsuperuser
+
+Follow the prompts to create your administrator credentials.
+
+8. Start the Development Server
+
+python manage.py runserver
+
+Open your browser and visit:
+
+Application: http://127.0.0.1:8000/
+
+Django Admin: http://127.0.0.1:8000/admin/
+
+⚙️ Production Deployment
+
+Before deploying the application:
+
+Set DEBUG=False and configure a secure SECRET_KEY.
+
+Configure ALLOWED_HOSTS and CSRF_TRUSTED_ORIGINS.
+
+Configure your production database and storage.
+
+Use HTTPS and store credentials securely.
+
+Run database migrations and collect static files.
+
+Configure a production-compatible application server.
+
+The project includes Gunicorn, WhiteNoise, and PostgreSQL-related dependencies. Production settings and deployment commands must be configured for the target hosting platform.
+
+🔒 Security and Privacy
+
+The repository excludes local environment files, virtual environments, SQLite databases, and uploaded media.
+
+Never commit personal information, uploaded resumes, production database files, or credentials.
+
+👨‍💻 Author
+
+Chitra
+
+GitHub: @Chitra867
+
+Built with Python and Django.
